@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Logger — Log car deals in seconds</title>
+<meta name="description" content="A free Chrome extension for car salespeople. Log a deal from your toolbar and see your whole month at a glance.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'%3E%3Cpath d='M0 0h24v30l-12-8.4L0 30z' fill='%23E8B24C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Inter:wght@400;500;600;700&amp;family=Caveat:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+  /* Change the accent color for the whole site here */
+  :root { --accent: #13703A; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; background: #F7F4EE; overflow-x: hidden; }
+  html { scroll-behavior: smooth; }
+  a { color: #17202E; text-decoration: none; }
+  a:hover { color: #13703A; }
+  a:focus-visible { outline: 3px solid #13703A; outline-offset: 3px; border-radius: 6px; }
+  img, svg { max-width: 100%; }
+  @media (max-width: 600px) { .hdr-cta { display: none !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div style="font-family: Inter, system-ui, -apple-system, sans-serif; color: #17202E; background: #F7F4EE; min-height: 100vh; width: 100%; box-sizing: border-box; overflow-x: clip; line-height: 1.5">
+
+<!-- Announcement bar -->
+<a href="#get" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; padding: 12px 20px; background: #182233; color: #F2F4F7; font-size: 14px; text-align: center">
+<span style="background: #E8B24C; color: #182233; font-weight: 700; font-size: 12px; padding: 3px 10px; border-radius: 999px">Free</span>
+<span>Now on Chrome and Firefox — log a deal straight from your toolbar.</span>
+<span style="text-decoration: underline; text-underline-offset: 3px">Get it free</span>
+</a>
+
+<header style="max-width: 1200px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="index.html" aria-label="Deal Logger home" style="display: inline-flex; align-items: center; min-height: 44px"><span style="display: inline-flex; align-items: center; gap: 10px; font-family: Fraunces, Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: #17202E"><span aria-hidden="true" style="display: inline-block; width: 12px; height: 15px; background: #E8B24C; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%)"></span>deal logger</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 15px; font-weight: 500">
+<a href="index.html" aria-current="page" style="color: var(--accent); display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Home</a>
+<a href="features.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Features</a>
+<a href="info.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Info</a>
+</nav>
+<a href="index.html#get" class="hdr-cta" style="padding: 12px 20px; border-radius: 999px; font-size: 15px; font-weight: 600; background: #182233; color: #F2F4F7; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Get it free</a>
+</header>
+
+<!-- Hero -->
+<section id="top" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: var(--accent)">Deal tracker for car sales pros</p>
+<h1 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 74px); line-height: 1.02; letter-spacing: -2px">Log the deal. <em style="font-style: italic; color: var(--accent)">Watch the month</em> add up.</h1>
+<p style="margin: 0; font-size: 19px; color: #3E4757; max-width: 520px">A free browser extension for car salespeople, on Chrome and Firefox. Save a deal from your toolbar in seconds and see your whole month at a glance.</p>
+<div id="get" style="display: flex; flex-direction: column; gap: 12px; padding-top: 8px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start"><a href="https://chromewebstore.google.com/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border-radius: 999px; background: var(--accent); color: #FFFFFF; border: 1px solid transparent; font-weight: 600; font-size: 16px; height: 52px; box-sizing: border-box; white-space: nowrap">Add to Chrome</a><a href="https://addons.mozilla.org/firefox/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border-radius: 999px; background: #182233; color: #F2F4F7; border: 1px solid #182233; font-weight: 600; font-size: 16px; height: 52px; box-sizing: border-box; white-space: nowrap">Add to Firefox</a></div>
+<a href="dashboard.html" style="display: inline-flex; align-items: center; padding: 0 24px; border-radius: 999px; border: 1px solid #17202E; font-weight: 600; font-size: 16px; height: 52px; box-sizing: border-box; align-self: flex-start; white-space: nowrap">Show Dashboard</a>
+</div>
+<p style="margin: 0; font-size: 14px; color: #566070">100% free · No sign-in · Saved on your device</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; position: relative; padding: 0 0 44px">
+<div role="img" aria-label="The Car Sales Tracker dashboard showing a sample month" style="background: #F6F7F9; border: 1px solid #E3E6EB; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 12px; font-family: Inter, system-ui, sans-serif; color: #111827; box-shadow: 0 30px 60px -30px rgba(24,34,51,.4)">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; white-space: nowrap"><span style="width: 9px; height: 9px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 8px rgba(22,163,74,.4)"></span>Car Sales Tracker</span>
+<span style="font-size: 11px; color: #5B6472; background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 8px; padding: 5px 9px; white-space: nowrap">Sample month · October</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; padding: 12px; min-width: 0"><div style="font-size: 11px; color: #5B6472; font-weight: 500; white-space: nowrap">Units sold</div><div style="font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; white-space: nowrap">14.5</div><span style="display: inline-block; margin-top: 2px; font-size: 10px; font-weight: 600; color: #15803D; border: 1px solid #E3E6EB; border-radius: 99px; padding: 1px 8px">Best month</span><div style="font-size: 10.5px; color: #5B6472; margin-top: 4px; white-space: nowrap"><b style="color: #15803D">▲ +21%</b> vs Sep</div></div>
+<div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; padding: 12px; min-width: 0"><div style="font-size: 11px; color: #5B6472; font-weight: 500; white-space: nowrap">New / Used</div><div style="font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; white-space: nowrap"><span style="color: #15803D">9</span> <span style="color: #5B6472; font-weight: 400">/</span> <span style="color: #2563EB">5.5</span></div><div style="font-size: 10.5px; color: #5B6472; margin-top: 4px; white-space: nowrap">16 deals</div></div>
+<div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; padding: 12px; min-width: 0"><div style="font-size: 11px; color: #5B6472; font-weight: 500; white-space: nowrap">Commission</div><div style="font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; white-space: nowrap">$4,850</div><div style="font-size: 10.5px; color: #5B6472; margin-top: 4px; white-space: nowrap">Optional, per deal</div></div>
+<div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; padding: 12px; min-width: 0"><div style="font-size: 11px; color: #5B6472; font-weight: 500; white-space: nowrap">Monthly goal</div><div style="font-size: 22px; font-weight: 700; line-height: 1.2; margin-top: 2px; white-space: nowrap">73%</div><div style="height: 6px; border-radius: 99px; background: #E3E6EB; margin-top: 6px; overflow: hidden"><div style="width: 73%; height: 100%; background: #16A34A; border-radius: 99px"></div></div><div style="font-size: 10.5px; color: #5B6472; margin-top: 4px; white-space: nowrap">On pace for 18 units</div></div>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #E3E6EB; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 13px; font-weight: 600">Units per month</span><span style="display: flex; gap: 10px; font-size: 10.5px; color: #5B6472"><span><b aria-hidden="true" style="display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #16A34A; margin-right: 4px"></b>New</span><span><b aria-hidden="true" style="display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #2563EB; margin-right: 4px"></b>Used</span></span></div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); height: 120px; align-items: end"><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 67%"><div style="flex: 4; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 6; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">May</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 70%"><div style="flex: 3.5; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 7; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">Jun</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 60%"><div style="flex: 4; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 5; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">Jul</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 83%"><div style="flex: 4.5; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 8; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">Aug</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 80%"><div style="flex: 5; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 7; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">Sep</span></div><div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end"><div style="width: 62%; display: flex; flex-direction: column; height: 97%"><div style="flex: 5.5; background: #2563EB; border-radius: 5px 5px 0 0"></div><div style="flex: 9; background: #16A34A"></div></div><span style="font-size: 10.5px; color: #5B6472">Oct</span></div></div>
+</div>
+</div>
+<div style="position: absolute; right: 24px; bottom: 0; background: #182233; color: #F2F4F7; border-radius: 16px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.5); max-width: 300px">
+<span style="width: 32px; height: 32px; border-radius: 50%; background: #3E7651; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<div><p style="margin: 0; font-size: 14px; font-weight: 600">Deal saved</p><p style="margin: 0; font-size: 13px; color: #A9B2C0">This month: 16 deals, 14.5 units</p></div>
+</div>
+</div>
+</section>
+
+<!-- 01 Product -->
+<section id="product" style="background: #FFFFFF; border-top: 1px solid #E2DCD0; border-bottom: 1px solid #E2DCD0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 720px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: var(--accent)">The extension</p>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: clamp(34px, 4vw, 52px); line-height: 1.08; letter-spacing: -1px; color: #17202E">Two views. One set of deals.</h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<article style="flex: 1 1 480px; min-width: 0; background: #F7F4EE; border: 1px solid #E2DCD0; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 22px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #566070">The popup</span>
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 32px; letter-spacing: -0.5px">Log a deal in seconds</h3>
+<p style="margin: 0; font-size: 17px; color: #3E4757">Click the icon, fill it in, press Enter. Done.</p>
+<div role="img" aria-label="The Deal Logger toolbar popup" style="width: 100%; max-width: 330px; box-sizing: border-box; background: #EEF1F4; border-radius: 16px; border: 1px solid #DDE2E8; padding: 14px; display: flex; flex-direction: column; gap: 8px; font-family: Inter, system-ui, sans-serif; color: #17202E; box-shadow: 0 24px 48px -28px rgba(24,34,51,.45)">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700"><span aria-hidden="true" style="display: inline-block; width: 12px; height: 15px; background: #E8B24C; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%)"></span>Log a deal</span>
+<span style="background: #182233; color: #FFFFFF; border-radius: 7px; padding: 7px 11px; font-size: 12px; font-weight: 600; box-shadow: 0 0 0 2px #EEF1F4, 0 0 0 3.5px #E8B24C">Dashboard</span>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; font-size: 13px; color: #6B7380">Customer name</div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; font-size: 13px; color: #6B7380">Vehicle (year, make, model)</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; font-size: 13px; color: #6B7380">Stock #</div><div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; font-size: 13px; color: #6B7380">10/29/2026</div></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; font-size: 13px; color: #6B7380">Commission ($)</div><div style="background: #FFFFFF; border: 1px solid #DDE2E8; border-radius: 9px; height: 38px; padding: 0 11px; display: flex; align-items: center; justify-content: space-between; font-size: 13px">Finance <span aria-hidden="true">▾</span></div></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #E2E6EB; border-radius: 9px; padding: 3px; gap: 2px; font-size: 12.5px"><span style="background: #FFFFFF; border-radius: 7px; padding: 7px 6px; text-align: center; font-weight: 600; color: #17202E; box-shadow: 0 1px 2px rgba(23,32,46,.08)">New car</span><span style="padding: 7px 6px; text-align: center; color: #5F6773">Used car</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #E2E6EB; border-radius: 9px; padding: 3px; gap: 2px; font-size: 12.5px"><span style="background: #FFFFFF; border-radius: 7px; padding: 7px 6px; text-align: center; font-weight: 600; color: #17202E; box-shadow: 0 1px 2px rgba(23,32,46,.08)">Full deal (1.0)</span><span style="padding: 7px 6px; text-align: center; color: #5F6773">Half deal (0.5)</span></div>
+<span style="background: #3E7651; color: #FFFFFF; border-radius: 9px; padding: 10px; text-align: center; font-size: 14px; font-weight: 700">Save deal</span>
+<span style="font-size: 12px; color: #5F6773; margin-top: 2px">This month: 15 deals, 14.5 units</span>
+</div>
+</article>
+<article style="flex: 1 1 480px; min-width: 0; background: #182233; color: #F2F4F7; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 22px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #A9B2C0">The Car Sales Tracker</span>
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 32px; letter-spacing: -0.5px">Your whole month on one screen</h3>
+<p style="margin: 0; font-size: 17px; color: #A9B2C0">Hit Dashboard in the popup and the Car Sales Tracker opens in its own tab.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 16px">
+<li style="display: flex; gap: 12px; align-items: flex-start;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7DDBA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>Units, new vs. used and commission</span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7DDBA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>Monthly goal and pace</span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7DDBA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>A printable month-end report</span></li>
+</ul>
+
+<div role="img" aria-label="Deal history table in the Car Sales Tracker" style="background: #FFFFFF; border-radius: 16px; padding: 14px 12px 6px; color: #111827; font-family: Inter, system-ui, sans-serif">
+<div style="font-size: 14px; font-weight: 600; margin: 0 4px 6px">Deal history</div>
+<div style="overflow-x: auto"><table style="width: 100%; border-collapse: collapse; font-size: 12.5px">
+<thead><tr><th style="padding: 8px; font-size: 11px; font-weight: 500; color: #5B6472; text-align: left; border-bottom: 1px solid #E3E6EB; white-space: nowrap">Date</th><th style="padding: 8px; font-size: 11px; font-weight: 500; color: #5B6472; text-align: left; border-bottom: 1px solid #E3E6EB; white-space: nowrap">Customer</th><th style="padding: 8px; font-size: 11px; font-weight: 500; color: #5B6472; text-align: left; border-bottom: 1px solid #E3E6EB; white-space: nowrap">Stock #</th><th style="padding: 8px; font-size: 11px; font-weight: 500; color: #5B6472; text-align: left; border-bottom: 1px solid #E3E6EB; white-space: nowrap">Type</th><th style="padding: 8px; font-size: 11px; font-weight: 500; color: #5B6472; text-align: left; border-bottom: 1px solid #E3E6EB; white-space: nowrap">Deal</th></tr></thead>
+<tbody><tr><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">10/12</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><div style="font-weight: 600">Laura Bennett</div><div style="font-size: 11.5px; color: #5B6472">2024 Honda CR-V</div></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">H2417</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><span style="display: inline-block; padding: 1px 9px; border-radius: 99px; border: 1px solid #E3E6EB; font-size: 11.5px; font-weight: 600; color: #15803D">New</span></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">1</td></tr><tr><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">10/09</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><div style="font-weight: 600">Daniel Kim</div><div style="font-size: 11.5px; color: #5B6472">2022 Toyota Camry</div></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">U1189</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><span style="display: inline-block; padding: 1px 9px; border-radius: 99px; border: 1px solid #E3E6EB; font-size: 11.5px; font-weight: 600; color: #2563EB">Used</span></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">1</td></tr><tr><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">10/07</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><div style="font-weight: 600">Maria Gonzalez</div><div style="font-size: 11.5px; color: #5B6472">2025 Honda Accord</div></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">H2433</td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top"><span style="display: inline-block; padding: 1px 9px; border-radius: 99px; border: 1px solid #E3E6EB; font-size: 11.5px; font-weight: 600; color: #15803D">New</span></td><td style="padding: 9px 8px; border-bottom: 1px solid #E3E6EB; white-space: nowrap; vertical-align: top">0.5</td></tr></tbody></table></div>
+</div>
+<div style="margin-top: auto; border-top: 1px solid #2C3850; padding-top: 22px; font-family: Fraunces, Georgia, serif; font-size: 26px; line-height: 1.25">Your deals. <span style="color: #7DDBA0">Your units.</span> Your month.</div>
+</article>
+</div>
+</div>
+</section>
+
+
+<footer style="border-top: 1px solid #E2DCD0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; font-size: 14px; color: #566070">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<a href="index.html" aria-label="Deal Logger home" style="display: inline-flex; align-items: center; min-height: 44px"><span style="display: inline-flex; align-items: center; gap: 10px; font-family: Fraunces, Georgia, serif; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: #17202E"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 12px; background: #E8B24C; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%)"></span>deal logger</span></a>
+<span>Log the deal. Watch the month add up.</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 4px 12px">
+<a href="#" style="color: #566070; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Support</a>
+<a href="privacy.html" style="color: #566070; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Privacy</a>
+<a href="#" style="color: #566070; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Terms</a>
+<a href="mailto:[YOUR EMAIL]" style="color: #566070; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px">Contact</a>
+</nav>
+<span>© 2026 Yafet Segued. All rights reserved.</span>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Car Sales Tracker — Live demo · Deal Logger</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30'%3E%3Cpath d='M0 0h24v30l-12-8.4L0 30z' fill='%23E8B24C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#F6F7F9;--card:#fff;--line:#E3E6EB;--text:#111827;--mut:#5B6472;--acc:#16A34A;--accT:#fff;--new:#16A34A;--used:#2563EB;--glow:rgba(22,163,74,.25);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1115;--card:#171A20;--line:#2A303A;--text:#F2F4F7;--mut:#A3ACBA;--acc:#22C55E;--accT:#04210F;--new:#22C55E;--used:#60A5FA;--glow:rgba(34,197,94,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1115;--card:#171A20;--line:#2A303A;--text:#F2F4F7;--mut:#A3ACBA;--acc:#22C55E;--accT:#04210F;--new:#22C55E;--used:#60A5FA;--glow:rgba(34,197,94,.5);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:14px;line-height:1.45}
+.wrap{max-width:1400px;margin:0 auto;padding:20px clamp(12px,2.5vw,32px) 48px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;margin-bottom:20px}
+h1{margin:0;font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--glow)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,button,select{font-family:inherit;font-size:14px;color:var(--text)}
+input[type=text],input[type=month],input[type=date],input[type=number]{height:40px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);min-width:0}
+input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px var(--glow)}
+.btn{height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--mut)}
+.pri{background:var(--acc);border-color:var(--acc);color:var(--accT);box-shadow:0 0 18px var(--glow)}
+.pri:hover{filter:brightness(1.08)}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:14px}
+.kpis{gap:clamp(8px,1.5vw,14px)}
+.kpis .card{container-type:inline-size;padding:clamp(10px,2vw,20px);border-radius:clamp(8px,1.6vw,14px);overflow:hidden}
+.kpis .lbl{font-size:clamp(10px,7cqw,13px);white-space:nowrap}
+.kpis .lbl input{font-size:inherit;width:4em!important;height:1.9em!important;padding:0 .3em!important;border-radius:.4em!important}
+.kpis .pill{font-size:inherit;padding:.1em .6em}
+.kpis .sub{font-size:clamp(9px,5.4cqw,13px);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.lbl{font-size:12px;font-weight:500;color:var(--mut)}
+.big{font-size:26px;font-size:clamp(20px,16cqw,44px);font-weight:700;margin-top:4px;line-height:1.1;white-space:nowrap}
+.sub{font-size:12px;color:var(--mut);margin-top:6px}
+.bar{height:8px;border-radius:99px;background:var(--line);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px;box-shadow:0 0 10px var(--glow)}
+.two{grid-template-columns:1.5fr 1fr;margin-bottom:14px}
+h2{margin:0 0 12px;font-size:15px;font-weight:600}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:6px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+form{display:grid;gap:10px}
+.seg{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.seg input{position:absolute;opacity:0;width:0;height:0}
+.seg label{flex:1;text-align:center;height:34px;line-height:32px;border-radius:9px;border:1px solid transparent;color:var(--mut);font-weight:500;font-size:13px;cursor:pointer;white-space:nowrap}
+.seg input:checked+label{background:var(--card);border-color:var(--line);color:var(--text);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.seg input:focus-visible+label{box-shadow:0 0 0 3px var(--glow)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th{font-size:12px;font-weight:500;color:var(--mut);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid var(--line)}
+.n{color:var(--new)}.u{color:var(--used)}.dn{color:#DC2626}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dn{color:#F87171}}
+:root[data-theme="dark"] .dn{color:#F87171}
+.x{background:none;border:0;color:var(--mut);cursor:pointer;font-size:18px;line-height:1;padding:4px 8px;border-radius:6px}
+.x:hover{color:var(--text)}.ed svg{display:block}
+.empty{padding:28px 10px;text-align:center;color:var(--mut)}
+.link{background:none;border:0;color:var(--acc);font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
+.pt{display:none}
+select{height:40px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.cs{padding:3px;width:auto}.cs label{flex:none;height:28px;line-height:26px;padding:0 14px;font-size:12px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.kpis .bar{height:6px;margin-top:8px}}
+@media print{
+:root:root:root{--bg:#fff;--card:#fff;--line:#d5d9e0;--text:#111;--mut:#555;--acc:#16A34A;--new:#15803D;--used:#1D4ED8;--glow:transparent;color-scheme:light}
+.noprint{display:none!important}.pt{display:block;margin-bottom:14px}
+body{font-size:12px}.wrap{padding:0;max-width:none}.card{break-inside:avoid;box-shadow:none}
+.two{grid-template-columns:1fr}.bar i{box-shadow:none}
+}
+
+.deals{display:flex;flex-direction:column;gap:12px}
+.dc{border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}
+.dh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;cursor:pointer}
+.dh:focus-visible{box-shadow:inset 0 0 0 3px var(--glow)}
+.stk{background:color-mix(in srgb,var(--used) 14%,transparent);color:var(--used);font-weight:700;padding:8px 14px;border-radius:12px;font-size:15px;white-space:nowrap}
+.dn1{font-size:17px;font-weight:700;line-height:1.2}
+.dv{font-size:13px;color:var(--mut)}
+.dots{margin-left:auto;display:flex;gap:6px;align-items:center}
+.dots i{width:10px;height:10px;border-radius:50%;background:color-mix(in srgb,var(--mut) 35%,transparent)}
+.dots i.on{background:var(--acc);box-shadow:0 0 8px var(--glow)}
+.chev{color:var(--mut);font-size:11px;transition:transform .2s;transform:rotate(180deg)}
+.dc.open .chev{transform:none}
+.dbody{display:none;padding:0 18px 18px}
+.dc.open .dbody{display:block}
+.dhr{border-top:1px solid var(--line);margin:0 0 14px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.sp{height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;font-weight:600;font-size:13px;cursor:pointer}
+.sp.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--text)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px 16px;margin-bottom:16px}
+.info small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:500}
+.info b{display:block;font-size:16px;margin-top:2px}
+.dact{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dbtn{height:46px;border-radius:12px;border:0;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.dbtn.ed2{background:color-mix(in srgb,var(--used) 14%,transparent);color:var(--used)}
+.dbtn.del{background:rgba(220,38,38,.1);color:#DC2626}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dbtn.del{color:#F87171}}
+:root[data-theme="dark"] .dbtn.del{color:#F87171}
+@media print{.dc .dbody{display:block!important}.chev{display:none}.dc{break-inside:avoid}}
+
+.mr{cursor:pointer}.mr:hover td{background:color-mix(in srgb,var(--text) 3%,transparent)}
+.mr .chev{display:inline-block}.mr.open .chev{transform:none}
+.xr td{background:color-mix(in srgb,var(--text) 3%,transparent)}
+.xp{padding:6px 4px 12px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 12px;margin-bottom:14px}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:500}
+.fl input,.fl select{text-transform:none;letter-spacing:0;font-size:14px;color:var(--text);width:100%}
+.xbar{display:flex;justify-content:flex-end;margin-top:4px}
+
+.rep{display:none}
+@media print{
+@page{size:letter;margin:14mm}
+.wrap>*:not(.rep){display:none!important}
+html,body{background:#fff!important;color:#111!important}
+.wrap{padding:0;max-width:none}
+.rep{display:block;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rh{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:16px}
+.rt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#555}
+.rm{font-size:26px;font-weight:700;line-height:1.15}
+.rn{font-size:14px;font-weight:600;text-align:right}
+.rn small{display:block;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#666}
+.rtab{width:100%;min-width:0;border-collapse:collapse;font-size:12px}
+.rtab th{background:#eee;color:#111;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:8px;border-top:1px solid #111;border-bottom:1px solid #111}
+.rtab td{padding:9px 8px;border-bottom:1px solid #d5d5d5;color:#111}
+.rtab tbody tr:nth-child(even) td{background:#fafafa}
+.rtab .r,.rtab th.r{text-align:right}
+.rtab tfoot td{border-top:2px solid #111;border-bottom:0;font-weight:700;padding-top:10px}
+.rtab tr{break-inside:avoid}
+.rempty{text-align:center;color:#666!important;padding:24px!important}
+.rsum{display:flex;gap:12px;margin-top:18px}
+.rsum div{flex:1;border:1px solid #bbb;border-radius:8px;padding:10px 12px}
+.rsum b{display:block;font-size:20px}
+.rsum span{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+.rsig{display:flex;gap:40px;margin-top:48px}
+.rsig div{flex:1;border-top:1px solid #111;padding-top:4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+.rf{margin-top:16px;font-size:10px;color:#777;text-align:right}
+}
+</style>
+</head>
+<body>
+<div class="noprint" role="note" style="background:#182233;color:#F2F4F7;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:center;text-align:center">
+<span><b style="background:#E8B24C;color:#182233;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:8px">Live demo</b>Sample data, saved only in this browser. Try logging a deal!</span>
+<span style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center"><a href="index.html" style="color:#F2F4F7;text-decoration:underline;text-underline-offset:3px">&larr; Back to site</a><a href="index.html#get" style="color:#E8B24C;font-weight:600;text-decoration:underline;text-underline-offset:3px">Get the extension</a></span>
+</div>
+<div class="wrap">
+<header>
+<h1><span class="dot"></span>Car Sales Tracker</h1>
+<div class="tools noprint">
+<input type="month" id="month" aria-label="Month">
+<button class="btn" id="theme" type="button" aria-label="Switch light or dark mode">Light / Dark</button>
+<button class="btn" id="print" type="button">Print</button>
+</div>
+</header>
+<div class="pt"><h2 style="font-size:18px" id="ptitle"></h2></div>
+
+<section class="grid kpis" aria-label="This month">
+<div class="card"><div class="lbl">Units sold <span class="pill n" id="k-best" style="display:none;margin-left:6px">Best month</span></div><div class="big" id="k-units">0</div><div class="sub" id="k-deals"></div>
+<div class="sub" id="k-chg"></div></div>
+<div class="card"><div class="lbl">New / Used</div><div class="big"><span class="n" id="k-new">0</span> <span style="color:var(--mut);font-weight:400">/</span> <span class="u" id="k-used">0</span></div></div>
+<div class="card"><div class="lbl">Commission</div><div class="big" id="k-amt">$0</div><div class="sub" id="k-amts">Optional, per deal</div></div>
+<div class="card"><div class="lbl">Monthly goal <span class="noprint">(<input type="number" id="goal" min="1" step="1" aria-label="Monthly goal" style="width:56px;height:26px;padding:0 6px;border-radius:6px"> units)</span></div><div class="big" id="k-pct">0%</div><div class="bar"><i id="k-bar" style="width:0%"></i></div><div class="sub" id="k-goal"></div>
+<div class="sub" id="k-pace"></div></div>
+</section>
+
+<section class="grid two">
+<div class="card">
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">Units per month</h2><div class="seg cs noprint" role="radiogroup" aria-label="Chart style"><input type="radio" name="cs" id="cs1" value="bar"><label for="cs1">Bar</label><input type="radio" name="cs" id="cs2" value="line"><label for="cs2">Line</label><input type="radio" name="cs" id="cs3" value="area"><label for="cs3">Area</label><input type="radio" name="cs" id="cs4" value="donut"><label for="cs4">Donut</label></div></div>
+<div class="legend"><span><b style="background:var(--new)"></b>New</span><span><b style="background:var(--used)"></b>Used</span></div>
+<div id="chart"></div>
+<div class="sub" id="yr"></div>
+</div>
+<div class="card noprint">
+<h2 id="ftitle">Log a deal</h2>
+<form id="f">
+<input type="text" id="cust" placeholder="Customer Name" aria-label="Customer Name" required>
+<input type="text" id="veh" placeholder="Vehicle (year, make, model)" aria-label="Vehicle">
+<div class="row"><input type="text" id="stock" placeholder="Stock #" aria-label="Stock #"><input type="date" id="date" aria-label="Date"></div>
+<input type="number" id="amt" min="0" step="any" inputmode="decimal" placeholder="Commission ($), optional" aria-label="Commission in dollars">
+<select id="dtype" aria-label="Deal type"><option>Finance</option><option>Cash</option><option>Lease</option><option>Outside finance</option></select>
+<div class="seg" role="radiogroup" aria-label="Car type"><input type="radio" name="car" id="c1" value="New" checked><label for="c1">New Car</label><input type="radio" name="car" id="c2" value="Used"><label for="c2">Used Car</label></div>
+<div class="seg" role="radiogroup" aria-label="Deal size"><input type="radio" name="deal" id="d1" value="1" checked><label for="d1">Full Deal (1.0)</label><input type="radio" name="deal" id="d2" value="0.5"><label for="d2">Half Deal (0.5)</label></div>
+<button class="btn pri" type="submit" id="fsub" style="height:46px">Log Deal</button>
+<button class="btn" type="button" id="fcancel" style="display:none">Cancel</button>
+</form>
+</div>
+</section>
+
+<section class="card">
+<h2>Deal history</h2>
+<div class="filters noprint"><input type="text" id="q" placeholder="Search customer, vehicle or stock #" aria-label="Search deals" style="flex:1;min-width:180px"><select id="ft" aria-label="Filter by car type"><option value="">All cars</option><option value="New">New</option><option value="Used">Used</option></select><select id="fd" aria-label="Filter by deal size"><option value="">All deals</option><option value="1">Full</option><option value="0.5">Half</option></select></div>
+<div class="scroll"><table>
+<thead><tr><th class="noprint"></th><th>Date</th><th>Customer</th><th>Stock #</th><th>Type</th><th>Deal</th><th>Commission</th></tr></thead>
+<tbody id="rows"></tbody>
+</table></div>
+<div class="empty" id="empty" style="display:none">No deals this month yet. <span class="noprint">Log your first one, or <button class="link" id="sample" type="button">load sample data</button> to preview.</span></div>
+<div class="empty" id="nomatch" style="display:none">No deals match your search.</div>
+</section>
+<section class="rep" id="report">
+<div class="rh"><div><div class="rt">Monthly Sales Report</div><div class="rm" id="rmonth"></div></div></div>
+<table class="rtab"><thead><tr><th>#</th><th>Date</th><th>Customer</th><th>Stock #</th><th>Vehicle</th><th>New / Used</th><th>Deal</th><th class="r">Units</th></tr></thead><tbody id="rrows"></tbody><tfoot><tr><td colspan="7">Total units sold</td><td class="r" id="rtot">0.0</td></tr></tfoot></table>
+<div class="rsum"><div><b id="rcnt">0</b><span>Deals</span></div><div><b id="rnew">0</b><span>New units</span></div><div><b id="rused">0</b><span>Used units</span></div></div>
+<div class="rsig"><div>Salesperson signature</div><div>Manager signature</div></div>
+<div class="rf" id="rdate"></div>
+</section>
+</div>
+<script src="dashboard.js"></script>
+<script>
+// Demo: fill in sample deals the first time someone opens this page
+window.addEventListener('load',function(){var e=document.getElementById('empty'),b=document.getElementById('sample');
+if(e&&b&&getComputedStyle(e).display!=='none'&&!localStorage.getItem('demo-seeded')){localStorage.setItem('demo-seeded','1');b.click();}});
+</script>
+</body>
+</html>
